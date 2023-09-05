@@ -12,7 +12,7 @@ const Navbar: FC<NavbarProps> = ({title}) => {
             <div>{title}</div>
         </div>
         <div>
-            <img src="../../public/profile.png" alt="" className='w-14 h-fit'/>
+            <img src="./profile.png" alt="" className='w-14 h-fit'/>
         </div>
     </div>
   )

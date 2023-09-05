@@ -22,7 +22,7 @@ const Sidebar = () => {
   return (
     <div className="w-[20vw] h-[100vh] fixed shadow-md flex flex-col">
       <img
-        src="../../public/logo.png"
+        src="./logo.png"
         alt=""
         className="w-40 h-auto pt-5 pl-5"
       />
