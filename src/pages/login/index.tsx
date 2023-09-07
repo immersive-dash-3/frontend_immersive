@@ -3,7 +3,7 @@ import Input from "../../component/Input";
 import Button from "../../component/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Cookie from "js-cookie";
+import Cookie from "js-cookie"
 import { useNavigate } from "react-router-dom";
 
 const index = () => {
@@ -20,6 +20,7 @@ const index = () => {
     })
     .then((res) => {
       const token = res?.data?.data.token
+      const role = res?.data?.data.role
 
       Swal.fire({
         icon: "success",
@@ -30,7 +31,8 @@ const index = () => {
         if (res.isConfirmed) {
           Cookie.set("token", token);
           Cookie.set("email", email);
-          Cookie.set("password", password);
+          Cookie.set("password", password)
+          Cookie.set("role", role);
           navigate("/dashboard");
         }
       });
