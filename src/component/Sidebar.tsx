@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 const Sidebar = () => {
   const location = useLocation();
   const [activePage, setActivePage] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -19,18 +20,32 @@ const Sidebar = () => {
     }
   });
 
+  const handleSidebar = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
-    <div className="w-[20vw] h-[100vh] fixed shadow-md flex flex-col">
+    <div className="lg:w-[20vw] lg:h-[100vh] fixed shadow-md flex lg:flex-col flex-row w-full justify-between items-center p-3 bg-white">
       <img
         src="../../public/logo.png"
         alt=""
-        className="w-40 h-auto pt-5 pl-5"
+        className="w-20 lg:w-40 h-auto lg:pt-5 lg:pl-5"
       />
-      <div className="flex flex-col justify-between h-full">
-        <ul className="px-6 py-5 leading-[40px]">
+      <button onClick={() => handleSidebar()} className="lg:hidden bg-transparent outline-none border-none focus:outline-none focus:border-none text-[20px]">
+        <i className="fa-solid fa-list"></i>
+      </button>
+      <div className={`${isOpen === true ? 'absolute top-0 left-0 bg-white w-[70vw] h-[100vh] shadow-md' : 'hidden'} lg:flex lg:flex-col lg:justify-between lg:h-full lg:w-full lg:relative lg:shadow-none`}>
+        <div className="px-10 flex justify-center mt-4 lg:hidden">
+          <img
+            src="../../public/logo.png"
+            alt=""
+            className="w-24"
+          />
+        </div>
+        <ul className="lg:px-6 px-2 py-5 leading-[40px] lg:text-[18px]">
           <a href="/dashboard">
             <li
-              className={`flex items-center rounded-lg px-3 mb-3 ${
+              className={`flex items-center rounded-lg px-3 lg:py-1 mb-3 ${
                 activePage === "dashboard"
                   ? "bg-activeBackground text-white"
                   : "hover:bg-activeBackground hover:text-white text-black"
@@ -42,7 +57,7 @@ const Sidebar = () => {
           </a>
           <a href="/mentee">
             <li
-              className={`flex items-center rounded-lg px-3 mb-3 ${
+              className={`flex items-center rounded-lg px-3 lg:py-1 mb-3 ${
                 activePage === "mentee"
                   ? "bg-activeBackground text-white"
                   : "hover:bg-activeBackground hover:text-white text-black"
@@ -54,7 +69,7 @@ const Sidebar = () => {
           </a>
           <a href="/user">
             <li
-              className={`flex items-center rounded-lg px-3 mb-3 ${
+              className={`flex items-center rounded-lg px-3 lg:py-1 mb-3 ${
                 activePage === "user"
                   ? "bg-activeBackground text-white"
                   : "hover:bg-activeBackground hover:text-white text-black"
@@ -66,7 +81,7 @@ const Sidebar = () => {
           </a>
           <a href="/class">
             <li
-              className={`flex items-center rounded-lg px-3 mb-3 ${
+              className={`flex items-center rounded-lg px-3 lg:py-1 mb-3 ${
                 activePage === "class"
                   ? "bg-activeBackground text-white"
                   : "hover:bg-activeBackground hover:text-white text-black"
@@ -77,10 +92,10 @@ const Sidebar = () => {
             </li>
           </a>
         </ul>
-        <ul className="px-6 py-5 leading-[40px]">
+        <ul className="lg:px-6 px-2 py-5 leading-[40px]">
           <a href="/class">
             <li
-              className={`flex items-center rounded-lg px-3 mb-3 ${
+              className={`flex items-center rounded-lg px-3 lg:py-1 mb-3 ${
                 activePage === "class"
                   ? "bg-activeBackground text-white"
                   : "hover:bg-activeBackground hover:text-white text-black"

@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 
 interface MenteeLogProps {
-    id: any,
+    id: string,
     log: string | number,
     status: string | number,
     date: string | number
@@ -9,7 +9,7 @@ interface MenteeLogProps {
 
 const MenteeLog: FC<MenteeLogProps> = ({id, log, status, date}) => {
   return (
-    <div id={id} className='flex flex-col shadow-md w-full p-5 leading-8 '>
+    <div id={id} className='flex flex-col shadow-md w-full p-5 leading-8 rounded-md'>
         <div className='text-end text-primary-color text-[0.9em]'>{date}</div>
         <div className='text-justify'>"{log}"</div>
         <div className='text-[0.9em] mt-3'>

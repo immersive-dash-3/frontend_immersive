@@ -58,20 +58,21 @@ const index = () => {
       },
     },
   };
+  
 
   return (
     <section className="flex flex-row">
       <div className="w-20vw h-[100vh]">
         <Sidebar />
       </div>
-      <div className="w-[78vw] ml-[20vw] px-10 py-5">
-        <Navbar title="Dashboard"/>
-        <div className="grid grid-cols-3 mt-5 gap-16 pl-5">
+      <div className="lg:w-[78vw] lg:ml-[20vw] lg:px-10 lg:py-5 p-2">
+        <div className="hidden lg:flex"><Navbar title="Dashboard"/></div>
+        <div className="grid grid-cols-3 lg:mt-5 lg:gap-16 gap-3 lg:pl-5 mt-24">
           <DashboardCard label="Active" count={40} />
           <DashboardCard label="Active" count={120} />
           <DashboardCard label="Active" count={25} />
         </div>
-        <div className="pl-10">
+        <div className="lg:pl-5">
           <DashboardChart chartOption={options} chartData={data}/>
         </div>
       </div>

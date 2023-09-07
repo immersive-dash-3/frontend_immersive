@@ -6,10 +6,10 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({title}) => {
   return (
-    <div className='flex flex-row w-full justify-between items-center'>
-        <div className='flex flex-col leading-6'>
-            <div className='text-[24px] font-bold'>Immersive Program</div>
-            <div>{title}</div>
+    <div className='lg:flex lg:flex-row lg:w-full lg:justify-between lg:items-center hidden mt-3'>
+        <div className='flex flex-col leading-7'>
+            <div className='text-[28px] font-bold'>Immersive Program</div>
+            <div className='text-[18px]'>{title}</div>
         </div>
         <div>
             <img src="../../public/profile.png" alt="" className='w-14 h-fit'/>
