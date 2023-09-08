@@ -1,27 +1,26 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 
-import Login from './pages/login'
-import Dashboard from './pages/dashboard'
-import DetailMentee from './pages/mentee/mentee_detail'
-import AddMentee from './pages/mentee/add_mentee'
-import UpdateMentee from './pages/mentee/edit_mentee'
-import axios from 'axios'
+import Landingpage from "./pages/landingpage";
+import Userlist from "./pages/user/user_list";
+import Menteelist from "./pages/mentee/mentee_list";
+import Classlist from "./pages/class/class_list";
+import Login from "./pages/login";
+import axios from "axios";
+import "./App.css"
 
-const App = () => {
+const App =() => {
   axios.defaults.baseURL = 'https://belanjalagiyuk.shop/'
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Login />} path='/login'/>
-        <Route element={<Dashboard />} path='/dashboard'/>
-        <Route element={<DetailMentee />} path='/mentee-detail/:id'/>
-        <Route element={<AddMentee />} path='/add-mentee'/>
-        <Route element={<UpdateMentee />} path='/edit-mentee/:id'/>
+        <Route path="/" element={<Landingpage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/User-list" element={<Userlist />} />
+        <Route path="/Mentee-list" element={<Menteelist />} />
+        <Route path="/Class-list" element={<Classlist />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
