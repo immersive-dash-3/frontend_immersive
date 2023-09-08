@@ -8,6 +8,7 @@ import Button from "../../../component/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Cookie from "js-cookie";
 
 const index = () => {
   const [editorData, setEditorData] = useState<string>("");
@@ -27,6 +28,8 @@ const index = () => {
   const [emergencyPhone, setEmergencyPhone] = useState<string>('');
   const [major, setMajor] = useState<string>('');
   const [graduation, setGraduation] = useState<string>('');
+
+  const token = Cookie.get('token')
   
   const addMentee = () => {
     axios.post('mentees', {
@@ -45,6 +48,10 @@ const index = () => {
       emergency_status: emergencyStatus,
       status: 0,
       class_id: 1
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     })
     .then((res) => {
       Swal.fire({
@@ -133,13 +140,13 @@ const index = () => {
               <input
                 type="radio"
                 className="bg-transparent outline-lime-400 mr-2 "
-                value={'L'}
+                value={'Laki-laki'}
                 checked={gender === 'L'}
                 onClick={(e) => setGender(e.target.value)}
               />
               <span className="text-[#2F2F2F]">Laki - laki</span>
               <input type="radio" className="mr-2 ml-5 text-[#2F2F2F]" value={'P'}
-                checked={gender === 'P'}
+                checked={gender === 'Perempuan'}
                 onClick={(e) => setGender(e.target.value)}/> <span className="text-[#2F2F2F]">Perempuan</span>
             </div>
           </div>
