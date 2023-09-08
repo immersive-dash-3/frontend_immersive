@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Cookie from "js-cookie";
+import Swal from "sweetalert2";
 
 const Sidebar = () => {
   const location = useLocation();
   const [activePage, setActivePage] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -22,6 +25,25 @@ const Sidebar = () => {
 
   const handleSidebar = () => {
     setIsOpen(!isOpen)
+  }
+
+  const handleLogout = () => {
+    Cookie.remove("token");
+    Cookie.remove('email');
+    Cookie.remove('password');
+
+    Swal.fire({
+      icon: "success",
+      title: "Logged out successfully",
+      showConfirmButton: false,
+      timer: 1500,
+    })
+    .then((res) => {
+      navigate('/login');
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   return (
@@ -93,7 +115,7 @@ const Sidebar = () => {
           </a>
         </ul>
         <ul className="lg:px-6 px-2 py-5 leading-[40px]">
-          <a href="/class">
+          <div onClick={() => handleLogout()}>
             <li
               className={`flex items-center rounded-lg px-3 lg:py-1 mb-3 ${
                 activePage === "class"
@@ -104,7 +126,7 @@ const Sidebar = () => {
               <i className="fa-solid fa-right-to-bracket mr-2"></i>
               Logout
             </li>
-          </a>
+          </div>
         </ul>
       </div>
     </div>
