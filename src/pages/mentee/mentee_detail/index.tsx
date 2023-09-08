@@ -10,6 +10,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Cookie from "js-cookie";
+import Swal from "sweetalert2";
 
 
 const index = () => {
@@ -18,11 +19,11 @@ const index = () => {
   const [data, setData] = useState<any>();
   
   const token = Cookie.get('token')
-  console.log(token);
-  
 
   const location = useLocation();
   const id = location?.state?.id;
+
+  const [status, setStatus] = useState<string>('');
 
   const addNewMentee = () => {
     setPopup(!popup);
@@ -44,7 +45,29 @@ const index = () => {
   };
 
   const addMentee = () => {
-    
+    axios.post('mentees/1/logs', {
+      status: status,
+      log: editorData
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+      Swal.fire({
+        icon:'success',
+        title: res.data.message,
+        showConfirmButton: false,
+        timer: 1000
+      })
+      .then((res) => {
+        getMentee(id);
+        setPopup(!popup);   
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   useEffect(() => {
@@ -109,9 +132,10 @@ const index = () => {
                     name="status"
                     className="mt-2 border-solid border-2 border-border-color rounded-lg focus:outline-none w-full py-3 px-2 bg-transparent"
                   >
-                    <option value="active">Active</option>
-                    <option value="active">Non Active</option>
-                    <option value="active">Active</option>
+                    <option value="Active" onChange={(e) => setStatus(e.target.value)}>Active</option>
+                    <option value="Unit 1" onChange={(e) => setStatus(e.target.value)}>Unit 1</option>
+                    <option value="Unit 2" onChange={(e) => setStatus(e.target.value)}>Unit 2</option>
+                    <option value="Placement" onChange={(e) => setStatus(e.target.value)}>Placement</option>
                   </select>
                 </div>
                 <div className="flex flex-col mt-5">
@@ -132,7 +156,7 @@ const index = () => {
                 </div>
               </div>
               <div className="w-full ">
-                <Button label="Add New Log" classNames={"w-full"} />
+                <Button label="Add New Log" onClick={() => addMentee()} classNames={"w-full"} />
               </div>
             </div>
           </ModalMenteeLog>
